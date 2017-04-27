@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "southeastasia"
+        },
+        "virtualMachineName": {
+            "value": "wschoststaging"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS3_v2"
+        },
+        "adminUsername": {
+            "value": "wscadmin"
+        },
+        "storageAccountName": {
+            "value": "wschoststagingstore"
+        },
+        "virtualNetworkName": {
+            "value": "wschost-staging-vn"
+        },
+        "networkInterfaceName": {
+            "value": "wschost-staging-nin"
+        },
+        "networkSecurityGroupName": {
+            "value": "wschost-staging-nsg"
+        },
+        "adminPassword": {
+            "value": "Password@123"
+        },
+        "storageAccountType": {
+            "value": "Premium_LRS"
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "wschoststagingrgdiag"
+        },
+        "diagnosticsStorageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "Microsoft.Storage/storageAccounts/wschoststagingrgdiag"
+        },
+        "addressPrefix": {
+            "value": "10.0.0.0/24"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "subnetPrefix": {
+            "value": "10.0.0.0/24"
+        },
+        "publicIpAddressName": {
+            "value": "wschost-staging-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        }
+    }
+}

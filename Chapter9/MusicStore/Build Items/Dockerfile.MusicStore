@@ -1,0 +1,23 @@
+﻿FROM microsoft/windowsservercore
+
+MAINTAINER Srikanth, srikanthma@live.com
+
+COPY ./Install /Windows/Temp/Setups
+
+RUN powershell -executionpolicy unrestricted C:\Windows\Temp\Setups\Install-DotNetCore.ps1
+
+ENV ASPNETCORE_ENVIRONMENT _
+
+WORKDIR /app
+
+EXPOSE 80
+
+ENV ASPNETCORE_URLS http://*:80
+
+COPY ./musicstore C:/app
+
+CMD powershell dotnet musicstore.dll
+
+
+
+

@@ -1,0 +1,24 @@
+﻿@inject IOptions<AppSettings> AppSettings
+@{
+    ViewBag.Title = "Create Album";
+}
+<h2>@ViewBag.Title.</h2>
+<form asp-controller="Home" asp-action="Create" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <h4>Create a new album.</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label for="image" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input type="file" name="image" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Upload" />
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

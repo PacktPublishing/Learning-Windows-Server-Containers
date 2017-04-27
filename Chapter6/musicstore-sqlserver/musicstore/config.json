@@ -1,0 +1,14 @@
+﻿{
+  "AppSettings": {
+    "SiteTitle": "Music Store",
+    "CacheDbResults": true,
+    "StorageLocation": "c:\\app\\wwwroot\\Images\\"
+  },
+  "DefaultAdminUsername": "Administrator@test.com",
+  "DefaultAdminPassword": "YouShouldChangeThisPassword1!",
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Data Source=wsc-dev-1016.cloudapp.net,1433;Initial Catalog=MusicStore;User ID=sa;Password=Password@123"
+    }
+  }
+}

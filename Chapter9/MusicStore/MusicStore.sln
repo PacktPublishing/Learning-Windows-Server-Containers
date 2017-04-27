@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4FBD81DE-0806-4F1C-9A84-415DD50234B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{937357FF-1EB8-4C57-BA1A-B3D7EB2B36F0}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		Local.testsettings = Local.testsettings
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStore", "MusicStore\MusicStore.xproj", "{802A13FE-D13D-4DFD-9FB8-8A942252E8C7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStore.API", "MusicStore.API\MusicStore.API.xproj", "{65EE4B7B-A795-4BCF-B136-AC911C111F43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{BE18D8F3-7A82-4286-83A4-6F470A314B1E}"
+	ProjectSection(SolutionItems) = preProject
+		Build Items\Build-MusicStore.ps1 = Build Items\Build-MusicStore.ps1
+		Build Items\Dockerfile.MusicStore = Build Items\Dockerfile.MusicStore
+		Build Items\Dockerfile.MusicStoreAPI = Build Items\Dockerfile.MusicStoreAPI
+		Build Items\Publish-Image.ps1 = Build Items\Publish-Image.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Install", "Install", "{BF65AE72-2C22-4F52-B874-AA7378808AB8}"
+	ProjectSection(SolutionItems) = preProject
+		Build Items\Install\Install-DotNetCore.ps1 = Build Items\Install\Install-DotNetCore.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C82F08C0-7FD5-4C98-98B9-601D69B10041}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStore.API.UnitTests", "MusicStore.API.UnitTests\MusicStore.API.UnitTests.xproj", "{61353818-6747-47BF-A4D8-49728C454C22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deploy Items", "Deploy Items", "{B1B66ACD-CE8E-4BF5-A12D-C16E9D6D78FC}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy Items\SPNCreation.ps1 = Deploy Items\SPNCreation.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Staging", "Staging", "{532B3F55-D423-4404-97F4-582E8A7A094C}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy Items\Staging\deploy.ps1 = Deploy Items\Staging\deploy.ps1
+		Deploy Items\Staging\parameters.json = Deploy Items\Staging\parameters.json
+		Deploy Items\Staging\template.json = Deploy Items\Staging\template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{AA1E108A-9B90-4801-8C10-8FAA126DDDE9}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy Items\Production\deploy.ps1 = Deploy Items\Production\deploy.ps1
+		Deploy Items\Production\parameters.json = Deploy Items\Production\parameters.json
+		Deploy Items\Production\template.json = Deploy Items\Production\template.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStore.API.FunctionalTests", "MusicStore.API.FunctionalTests\MusicStore.API.FunctionalTests.xproj", "{37945144-BB67-4030-8F3B-10345E7A1CA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx.MusicStore", "Nginx.MusicStore", "{DDFBF23F-587A-4872-AADA-65A59C34D58D}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy Items\Production\NGinx.MusicStore\Dockerfile = Deploy Items\Production\NGinx.MusicStore\Dockerfile
+		Deploy Items\Production\NGinx.MusicStore\nginx.conf = Deploy Items\Production\NGinx.MusicStore\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NGinx.MusicStore.API", "NGinx.MusicStore.API", "{6206A9EF-B712-4065-A059-488F3657D5AC}"
+	ProjectSection(SolutionItems) = preProject
+		Deploy Items\Production\NGinx.MusicStore.API\Dockerfile = Deploy Items\Production\NGinx.MusicStore.API\Dockerfile
+		Deploy Items\Production\NGinx.MusicStore.API\nginx.conf = Deploy Items\Production\NGinx.MusicStore.API\nginx.conf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{802A13FE-D13D-4DFD-9FB8-8A942252E8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802A13FE-D13D-4DFD-9FB8-8A942252E8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802A13FE-D13D-4DFD-9FB8-8A942252E8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802A13FE-D13D-4DFD-9FB8-8A942252E8C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65EE4B7B-A795-4BCF-B136-AC911C111F43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65EE4B7B-A795-4BCF-B136-AC911C111F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65EE4B7B-A795-4BCF-B136-AC911C111F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65EE4B7B-A795-4BCF-B136-AC911C111F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61353818-6747-47BF-A4D8-49728C454C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61353818-6747-47BF-A4D8-49728C454C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61353818-6747-47BF-A4D8-49728C454C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61353818-6747-47BF-A4D8-49728C454C22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37945144-BB67-4030-8F3B-10345E7A1CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37945144-BB67-4030-8F3B-10345E7A1CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37945144-BB67-4030-8F3B-10345E7A1CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37945144-BB67-4030-8F3B-10345E7A1CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{802A13FE-D13D-4DFD-9FB8-8A942252E8C7} = {4FBD81DE-0806-4F1C-9A84-415DD50234B0}
+		{65EE4B7B-A795-4BCF-B136-AC911C111F43} = {4FBD81DE-0806-4F1C-9A84-415DD50234B0}
+		{BF65AE72-2C22-4F52-B874-AA7378808AB8} = {BE18D8F3-7A82-4286-83A4-6F470A314B1E}
+		{61353818-6747-47BF-A4D8-49728C454C22} = {C82F08C0-7FD5-4C98-98B9-601D69B10041}
+		{532B3F55-D423-4404-97F4-582E8A7A094C} = {B1B66ACD-CE8E-4BF5-A12D-C16E9D6D78FC}
+		{AA1E108A-9B90-4801-8C10-8FAA126DDDE9} = {B1B66ACD-CE8E-4BF5-A12D-C16E9D6D78FC}
+		{37945144-BB67-4030-8F3B-10345E7A1CA2} = {C82F08C0-7FD5-4C98-98B9-601D69B10041}
+		{DDFBF23F-587A-4872-AADA-65A59C34D58D} = {AA1E108A-9B90-4801-8C10-8FAA126DDDE9}
+		{6206A9EF-B712-4065-A059-488F3657D5AC} = {AA1E108A-9B90-4801-8C10-8FAA126DDDE9}
+	EndGlobalSection
+EndGlobal

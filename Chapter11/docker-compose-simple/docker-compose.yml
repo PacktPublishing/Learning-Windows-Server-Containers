@@ -1,0 +1,18 @@
+version: '3'
+services:
+ web:
+  image: microsoft/iis
+  ports:
+   - "8080:8080"
+ db:
+  image: microsoft/mssql-server-windows
+  ports:
+    - "1433:1433"
+  environment:
+   - ACCEPT_EULA="Y"
+  volumes:
+   - c:\data
+networks:
+ default:
+  external:
+   name: "nat"

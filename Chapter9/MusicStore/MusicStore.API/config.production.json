@@ -1,0 +1,15 @@
+﻿{
+  "AppSettings": {
+    "SiteTitle": "Music Store",
+    "CacheDbResults": true,
+    "StorageLocation": "c:\\app\\wwwroot\\Images\\",
+    "RedisConnection": "musicstoreprod.southeastasia.cloudapp.azure.com:6379"
+  },
+  "DefaultAdminUsername": "Administrator@test.com",
+  "DefaultAdminPassword": "YouShouldChangeThisPassword1!",
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Data Source=musicstoreprod.southeastasia.cloudapp.azure.com,1433;Initial Catalog=MusicStore;User ID=sa;Password=Password@123"
+    }
+  }
+}

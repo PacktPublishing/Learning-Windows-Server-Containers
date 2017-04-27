@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "southeastasia"
+        },
+        "virtualMachineName": {
+            "value": "musicstoreprod"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS2_v2"
+        },
+        "adminUsername": {
+            "value": "musicstore"
+        },
+        "storageAccountName": {
+            "value": "musicstoreproddisks404"
+        },
+        "virtualNetworkName": {
+            "value": "musicstoreprodnet"
+        },
+        "networkInterfaceName": {
+            "value": "musicstoreprod642"
+        },
+        "networkSecurityGroupName": {
+            "value": "musicstoreprod-nsg"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "storageAccountType": {
+            "value": "Premium_LRS"
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "musicstoreproddiag971"
+        },
+        "diagnosticsStorageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "Microsoft.Storage/storageAccounts/musicstoreproddiag971"
+        },
+        "addressPrefix": {
+            "value": "192.168.0.0/24"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "subnetPrefix": {
+            "value": "192.168.0.0/24"
+        },
+        "publicIpAddressName": {
+            "value": "musicstoreprod-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        }
+    }
+}

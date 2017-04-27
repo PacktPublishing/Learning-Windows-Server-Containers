@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies>
+  <assembly name="MusicStore.API.UnitTests.dll" environment="64-bit .NET (unknown version) [collection-per-class, parallel (4 threads)]" test-framework="xUnit.net 2.2.0.3444" run-date="2017-01-07" run-time="00:15:57" total="4" passed="4" failed="0" skipped="0" time="7.942" errors="0">
+    <errors />
+    <collection total="4" passed="4" failed="0" skipped="0" name="Test collection for MusicStore.API.UnitTests.AlbumControllerTests" time="7.215">
+      <test name="MusicStore.API.UnitTests.AlbumControllerTests.Test_GetAlbums" type="MusicStore.API.UnitTests.AlbumControllerTests" method="Test_GetAlbums" time="6.3016842" result="Pass" />
+      <test name="MusicStore.API.UnitTests.AlbumControllerTests.Test_GetCachedAlbums" type="MusicStore.API.UnitTests.AlbumControllerTests" method="Test_GetCachedAlbums" time="0.2990339" result="Pass" />
+      <test name="MusicStore.API.UnitTests.AlbumControllerTests.Test_GetById" type="MusicStore.API.UnitTests.AlbumControllerTests" method="Test_GetById" time="0.557478" result="Pass" />
+      <test name="MusicStore.API.UnitTests.AlbumControllerTests.Test_GetByIdFromCache" type="MusicStore.API.UnitTests.AlbumControllerTests" method="Test_GetByIdFromCache" time="0.0570454" result="Pass" />
+    </collection>
+  </assembly>
+</assemblies>

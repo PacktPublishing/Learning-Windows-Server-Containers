@@ -1,0 +1,398 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string"
+    },
+    "virtualMachineName": {
+      "type": "string"
+    },
+    "virtualMachineSize": {
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "storageAccountName": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "networkInterfaceName": {
+      "type": "string"
+    },
+    "networkSecurityGroupName": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "securestring"
+    },
+    "storageAccountType": {
+      "type": "string"
+    },
+    "diagnosticsStorageAccountName": {
+      "type": "string"
+    },
+    "diagnosticsStorageAccountId": {
+      "type": "string"
+    },
+    "diagnosticsStorageAccountType": {
+      "type": "string"
+    },
+    "addressPrefix": {
+      "type": "string"
+    },
+    "subnetName": {
+      "type": "string"
+    },
+    "subnetPrefix": {
+      "type": "string"
+    },
+    "publicIpAddressName": {
+      "type": "string"
+    },
+    "publicIpAddressType": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "vnetId": "[resourceId('musicstoreprodrg','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+    "apiVersion": "2015-06-15",
+    "hostDNSNameScriptArgument": "[concat('*.',parameters('location'),'.cloudapp.azure.com')]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('storageAccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-06-15",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[parameters('storageAccountType')]"
+      }
+    },
+    {
+      "name": "[parameters('diagnosticsStorageAccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2015-06-15",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[parameters('diagnosticsStorageAccountType')]"
+      }
+    },
+    {
+      "name": "[parameters('virtualNetworkName')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "properties": {
+              "addressPrefix": "[parameters('subnetPrefix')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('networkInterfaceName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
+        "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]",
+        "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              },
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIpAddress": {
+                "id": "[resourceId('musicstoreprodrg','Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "[resourceId('musicstoreprodrg', 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('publicIpAddressName')]",
+      "type": "Microsoft.Network/publicIpAddresses",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIpAllocationMethod": "[parameters('publicIpAddressType')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('virtualMachineName')]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('networkSecurityGroupName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Http",
+            "properties": {
+              "priority": 100,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "80",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "API",
+            "properties": {
+              "priority": 105,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "81",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "MSSQL",
+            "properties": {
+              "priority": 110,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "1433",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "WEB1",
+            "properties": {
+              "priority": 115,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5000",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "WEB2",
+            "properties": {
+              "priority": 120,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5001",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "WEB3",
+            "properties": {
+              "priority": 125,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5002",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "API1",
+            "properties": {
+              "priority": 130,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5100",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "API2",
+            "properties": {
+              "priority": 135,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5101",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "API3",
+            "properties": {
+              "priority": 140,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5102",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "Redis",
+            "properties": {
+              "priority": 145,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "6379",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "WinRM",
+            "properties": {
+              "priority": 150,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "5986",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          },
+          {
+            "name": "default-allow-rdp",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "3389",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('virtualMachineName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2016-03-30",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('diagnosticsStorageAccountName'))]"
+      ],
+      "properties": {
+        "osProfile": {
+          "computerName": "[parameters('virtualMachineName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "provisionVmAgent": "true"
+          }
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('virtualMachineSize')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2016-Datacenter-with-Containers",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "[parameters('virtualMachineName')]",
+            "createOption": "fromImage",
+            "vhd": {
+              "uri": "[concat(concat(reference(resourceId('musicstoreprodrg', 'Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-06-15').primaryEndpoints['blob'], 'vhds/'), parameters('virtualMachineName'), '20170114102922.vhd')]"
+            }
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": true,
+            "storageUri": "[reference(resourceId('musicstoreprodrg', 'Microsoft.Storage/storageAccounts', parameters('diagnosticsStorageAccountName')), '2015-06-15').primaryEndpoints['blob']]"
+          }
+        }
+      },
+      "resources": [
+        {
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+          "name": "[concat(parameters('virtualMachineName'),'/WinRMCustomScriptExtension')]",
+          "apiVersion": "[variables('apiVersion')]",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+          ],
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.4",
+            "settings": {
+              "fileUris": [
+                "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/ConfigureWinRM.ps1",
+                "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/makecert.exe",
+                "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-winrm-windows/winrmconf.cmd"
+              ],
+              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ConfigureWinRM.ps1 ',variables('hostDNSNameScriptArgument'))]"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "adminUsername": {
+      "type": "string",
+      "value": "[parameters('adminUsername')]"
+    }
+  }
+}

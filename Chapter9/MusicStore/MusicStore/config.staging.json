@@ -1,0 +1,8 @@
+﻿{
+  "AppSettings": {
+    "SiteTitle": "Music Store",
+    "APIUrl" :  "http://musicstorestag.southeastasia.cloudapp.azure.com:81"
+  },
+  "DefaultAdminUsername": "Administrator@test.com",
+  "DefaultAdminPassword": "YouShouldChangeThisPassword1!"
+}
