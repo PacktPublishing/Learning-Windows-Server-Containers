@@ -19,8 +19,8 @@ The code will look like the following:
 
 There are no code files for the following chapters:
 
-- **Chapter 01**  - Exploring Virtualization
-- **Chapter 10**  - Manage Resource Allocation and REST API
+- **Chapter01**  - Exploring Virtualization
+- **Chapter10**  - Manage Resource Allocation and REST API
 
 ### Software and Hardware requirements:
 
