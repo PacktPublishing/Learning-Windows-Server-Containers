@@ -13,15 +13,9 @@ All of the code is organized into folders. Each folder starts with a number foll
 
 The code will look like the following:
        
-       static int ngpios;
-       static int gpios[2] = { -1 , -1 };
-       module_param_array(gpios, int, &ngpios, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
-       MODULE_PARM_DESC(gpios, "Defines the GPIOs number to be used as a list of"
-                        " numbers separated by commas.");
-
-       /* Logging stuff */
-       #define __message(level, fmt, args...)                                  \
-                       printk(level "%s: " fmt "\n" , NAME , ## args)
+       $sectionaspNetCore = $appHostConfig.RootSectionGroup.SectionGroups["system.webServer"].Sections.Add("aspNetCore")
+       $sectionaspNetCore.OverrideModeDefault = "Allow"
+       $sm.CommitChanges()
 
 There are no code files for the following chapters:
 
